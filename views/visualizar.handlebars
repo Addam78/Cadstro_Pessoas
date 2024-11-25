@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Usuarios cadastrados</h2>
+    <a href="/">Retorna a pagina de cadastro</a>
+    {{!--Listagem do usuario--}}
+
+    <div>
+        
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Endereço</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Alterar</th>
+                        <th scope="col">Deletar</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each pessoas}}
+                    <tr>
+                        <th scope="row">#</th>
+                        <td>{{nome}}</td>
+                        <td>{{endereco}}</td>
+                        <td>{{celular}}</td>
+                        <td>{{email}}</td>
+                        <td> <a href="/formularioeditar/{{nome}}" class="btn btn-outline-primary">Alterar</a></td>
+                        <td><a href="/deletar/{{nome}}" class="btn btn-outline-danger">Deletar</a></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        
+     </div>
+
+</body>
+</html>
+
+
+{{!-- /deletar/{{nome}} --}}
