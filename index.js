@@ -65,9 +65,14 @@ app.post('/cadastro' , function(req,res){
 
     //QUERY
     conexao.query(sql, function(erro , retorno){
-        if (erro) throw erro
+        if (erro){
+            console.error('Erro:',erro)
+        }else{
+            console.log('Usuario Criado com sucesso')
+            res.redirect('/view')
+        }
 
-        console.log(erro)
+        
     })
 })
 
@@ -113,26 +118,25 @@ app.get('/formularioeditar/:nome', function(req,res){
 //ROTA EDIÇÃO, POST
 app.post('/editar', function(req,res){
     //OBTER DADOS
+    let Id = req.body.Id
     let name = req.body.nome
     let adress = req.body.endereco
     let phone = req.body.celular
     let emails = req.body.email
 
-    //EXIBIR DADOS
-    // console.log(name)
-    // console.log(adress)
-    // console.log(phone)
-    // console.log(emails)
 
     //SQL
-    let sql = `UPDATE pessoas SET  nome = '${name}' , endereco = '${adress}' , celular = ${phone} , email = '${emails}' WHERE nome = '${name}'`
-    conexao.query(sql, function(erro, retorno){
-        if(erro) throw erro
-    })
-    res.redirect('/view')
-    //FINALIZAR TAREFA 
+    let sql = `UPDATE pessoas SET nome = ?, endereco = ?, celular = ?, email = ? WHERE Id = ?`;
+    conexao.query(sql, [name, adress, phone, emails, Id], function(erro, retorno) {
+        if (erro) {
+            throw erro;
+        } else {
+            console.log(`${name}, ${adress}, ${phone}, ${emails}`);
+        }
+    });
     
-    // res.end()
+    res.redirect('/view');
+    
 
 })
 
