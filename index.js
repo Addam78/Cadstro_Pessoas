@@ -48,10 +48,6 @@ conexao.connect(function(erro){
 
 
 // Rota para renderizar 'cadastro.handlebars'
-// app.get('/', function(req, res) {
-//     res.render('cadastro');
-// });
-
 
 // app.post('/cadastro' , function(req,res){
 //     let name =req.body.nome

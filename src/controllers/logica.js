@@ -98,7 +98,7 @@ exports.edicao =(req,res) =>{
         if (erro) {
             throw erro;
         } else {
-            console.log(`${name}, ${adress}, ${phone}, ${emails}`);
+            console.log(`Dados atualizados ${name}, ${adress}, ${phone}, ${emails}`);
         }
     });
     
