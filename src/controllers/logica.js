@@ -1,19 +1,32 @@
 //DELCARAND CONSTANTE DO MYSQL2
+require('dotenv').config()
+
 const mysql = require('mysql2')
+
+// Criação da conexão com MySQL
+const conexao = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
+  });
+
 
 const express = require('express')
 
 
 const app = express()
 
-//CONFIGURAÇÃO DE CONEXÃO
-const conexao = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'1234',
-    database:'usuarios'
-})
 
+  //CONFIGURAÇÃO DE CONEXÃO
+// const conexao = mysql.createConnection({
+//     host:'localhost',
+//     user:'root',
+//     password:'1234',
+//     database:'usuarios',
+//     port : '3306'
+// })
 
 //ROTA INICIAL
 exports.home = (req,res) =>{

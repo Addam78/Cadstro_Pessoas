@@ -1,20 +1,30 @@
 const express = require('express')
 const router = express.Router();
-const mysql = require('mysql2')
 
 const app = express()
 
 const logica = require('../controllers/logica');
 const { log } = require('handlebars');
 
-//CONFIGURAÇÃO DE CONEXÃO
-const conexao = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'1234',
-    database:'usuarios'
-})
 
+require('dotenv').config();
+
+//CONFIGURANDO MYSQL
+const mysql = require('mysql2')
+
+//CONFIGURANDO BANCO DE DADOS COM ARQUIVO ENV
+
+// Criação da conexão com MySQL
+const conexao = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
+  });
+
+
+  
 //ROTA INICIAL
 router.get('/',logica.home)
 

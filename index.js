@@ -24,118 +24,37 @@ app.engine('handlebars', handlebars.engine({
   },
 }))
 app.set('view engine', 'handlebars')
+
+
+require('dotenv').config();
+
 //CONFIGURANDO MYSQL
 const mysql = require('mysql2')
 
-//CONFIGURAÇÃO DE CONEXÃO
-const conexao = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'1234',
-    database:'usuarios'
-})
+//CONFIGURANDO BANCO DE DADOS COM ARQUIVO ENV
 
+// Criação da conexão com MySQL
+const conexao = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
+  });
+
+
+  
 //TESTE CONEXÃO
 conexao.connect(function(erro){
     if(erro) throw erro;
     console.log('Conexão com suceso')
 })
 
+//CONFIGURANDO VARIAVEL DOTENV
+
 // Especifique o diretório onde estão os arquivos de views
 //app.set('layouts', path.join(__dirname, 'C:\Users\AddamCosmo\Documents\Projetos_github_vscode\cadastro_pessoas\views\layouts'));
 
-// Rota para renderizar 'main.handlebars'
-
-
-// Rota para renderizar 'cadastro.handlebars'
-
-// app.post('/cadastro' , function(req,res){
-//     let name =req.body.nome
-//     let adress = req.body.endereco
-//     let phone = req.body.celular
-//     let emails = req.body.email
-
-
-//     //SQL
-//     let sql = `INSERT INTO pessoas (nome,endereco,celular,email) VALUES ('${name}', '${adress}', '${phone}',' ${emails}')`
-
-//     //QUERY
-//     conexao.query(sql, function(erro , retorno){
-//         if (erro){
-//             console.error('Erro:',erro)
-//         }else{
-//             console.log('Usuario Criado com sucesso')
-//             res.redirect('/view')
-//         }
-
-        
-//     })
-// })
-
-// ROTA PARA VISUALIZAR
-// app.get('/view', function(req,res){
-//     let sql = `SELECT * FROM pessoas`
-    
-//     //EXECUTAR COMANDO SQL
-//     conexao.query(sql, function(erro, retorno){
-//         res.render('visualizar', {pessoas:retorno})
-//     })
-// })
-
-// // //Rota para remover
-// app.get('/deletar/:nome', function(req,res){
-//     //console.log(`O usuario com nome ${req.params.nome} foi deletado com sucesso`)
-//     //res.end()
-//     //SQL
-//     let sql = `DELETE FROM pessoas WHERE nome = '${req.params.nome}'`
-    
-//     //EXECUTAR O COMANDO    
-//     conexao.query(sql, function(erro, retorno){
-//         if (erro) throw erro  
-//     }) 
-//     res.redirect('/view') 
-    
-// })
-
-
-// //ROTA PARA ALTERAÇÃO
-// app.get('/formularioeditar/:nome', function(req,res){
-   
-//         //SQL
-//         let sql = `SELECT * FROM pessoas WHERE nome = '${req.params.nome}'`
-
-//         //EXECUTAR COMANDO
-//         conexao.query(sql, function(erro, retorno){
-//             if (erro) throw erro
-    
-//             res.render('formularioeditar', {pessoas:retorno[0]})
-//         })
-// })
-
-// //ROTA EDIÇÃO, POST
-// app.post('/editar', function(req,res){
-//     //OBTER DADOS
-//     let Id = req.body.Id
-//     let name = req.body.nome
-//     let adress = req.body.endereco
-//     let phone = req.body.celular
-//     let emails = req.body.email
-
-
-//     //SQL
-//     let sql = `UPDATE pessoas SET nome = ?, endereco = ?, celular = ?, email = ? WHERE Id = ?`;
-//     conexao.query(sql, [name, adress, phone, emails, Id], function(erro, retorno) {
-//         if (erro) {
-//             throw erro;
-//         } else {
-//             console.log(`${name}, ${adress}, ${phone}, ${emails}`);
-//         }
-//     });
-    
-//     res.redirect('/view');
-    
-
-// })
 
 //EXPRTANDO ARQIVO ROUTES
 const routes = require('./src/routes/routes')
