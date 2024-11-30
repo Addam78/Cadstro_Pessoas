@@ -50,6 +50,8 @@ conexao.connect(function(erro){
     console.log('Conexão com suceso')
 })
 
+const PORT = process.env.PORT || 8081;
+
 //CONFIGURANDO VARIAVEL DOTENV
 
 // Especifique o diretório onde estão os arquivos de views
@@ -61,6 +63,6 @@ const routes = require('./src/routes/routes')
 app.use(routes)
 
 // Servidor iniciando na porta 8081
-app.listen(8081, () => {
-    console.log(`Servidor rodando na porta http://localhost:8081/`);
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta http://localhost:${PORT}/`);
 });
