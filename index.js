@@ -31,7 +31,7 @@ require('dotenv').config();
 //CONFIGURANDO MYSQL
 const mysql = require('mysql2')
 
-//CONFIGURANDO BANCO DE DADOS COM ARQUIVO ENV
+
 
 // Criação da conexão com MySQL
 const conexao = mysql.createConnection({
